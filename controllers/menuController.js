@@ -22,7 +22,7 @@ export const create = (req, res) => {
     .catch(err => {
       res.status(500).send({
         message:
-          err.message || "Some error occurred while creating the Tutorial."
+          err.message || "Some error occurred while creating the Menu."
       });
     });
 }
@@ -65,14 +65,57 @@ export const findOne = (req, res) => {
     });
 }
 
-// export const update = (req, res) => {
+// Edit an existing menu
+export const update = (req, res) => {
+  const id = req.params.id;
 
-// }
+  Menu.update(req.body, {
+    where: { id: id }
+  })
+    .then(num => {
+      if (num == 1) {
+        res.send({
+          message: "Menu was updated successfully."
+        });
+      } else {
+        res.send({
+          message: `Cannot update Menu with id=${id}. Maybe Menu was not found or req.body is empty!`
+        });
+      }
+    })
+    .catch(err => {
+      res.status(500).send({
+        message: "Error updating Menu with id=" + id
+      });
+    });
+}
 
-// export const remove = (req, res) => {
+// Remove a menu
+export const remove = (req, res) => {
+  const id = req.params.id;
 
-// }
+  Menu.destroy({
+    where: { id: id }
+  })
+    .then(num => {
+      if (num == 1) {
+        res.send({
+          message: "Menu was deleted successfully!"
+        });
+      } else {
+        res.send({
+          message: `Cannot delete Menu with id=${id}. Maybe Menu was not found!`
+        });
+      }
+    })
+    .catch(err => {
+      res.status(500).send({
+        message: "Could not delete Menu with id=" + id
+      });
+    });
+}
 
+// Schould not be used :)
 // export const removeAll = (req, res) => {
 
 // }
