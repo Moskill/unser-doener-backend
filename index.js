@@ -2,6 +2,7 @@ import 'dotenv/config.js';
 import express from 'express';
 import menuRouter from './routes/menuRouter.js';
 import sideDishesRouter from './routes/sideDishesRouter.js';
+import menuSideDishesRouter from './routes/menuSideDishesRouter.js';
 import cors from 'cors';
 import { sequelize } from './models/index.js'; // For sync the Sequelizer in L. 14-17
 
@@ -22,14 +23,15 @@ app.use(express.urlencoded({ extended: true }));
 
 // Hier dann die weiteren Routes hinzufügen
 app.use('/menu', menuRouter);
-app.use('/sideDishes', sideDishesRouter)
+app.use('/sideDishes', sideDishesRouter);
+app.use('/menuSideDishes', menuSideDishesRouter)
 
 app.get("/", (req, res) => {
   res.json({ message: "A simple route is working so far" });
 });
 
 app.get("/admin", (req, res) => {
-  res.json({ message: "Entering the Admin scetion..." });
+  res.json({ message: "Entering the Admin section..." });
 });
 
 app.listen(port, () => {
