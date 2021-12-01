@@ -2,6 +2,7 @@ import Menu from '../models/menuModel.js';
 
 // Create a new menu
 export const create = (req, res) => {
+  console.log(req.body.imageUpload.rawFile.path, 'Der req-body von create menu')
   if (!req.body.name) {
     res.status(400).send({
       message: "Name can not be empty!"
@@ -12,10 +13,12 @@ export const create = (req, res) => {
   const menu = {
     name: req.body.name,
     description: req.body.description,
-    price: req.body.price
+    price: req.body.price,
+    imgUrl: req.body.imageUpload.rawFile.path
   };
 
   Menu.create(menu)
+    
     .then(data => {
       res.send(data);
     })

@@ -33,42 +33,40 @@ export const create = (req, res) => {
 }
 
 // Get all menus
-// export const findAll = (req, res) => {
-//   const id = req.params.m_id;
-//   let condition = id ? { [Op.like]: `%${id}%` }  : null;
+export const findAll = (req, res) => {
 
-//   MenuSideDishes.findAll({ where: condition })
-//     .then(data => {
-//       res.send(data);
-//     })
-//     .catch(err => {
-//       res.status(500).send({
-//         message:
-//           err.message || "Nothing found!"
-//       });
-//     });
-// }
+  Users.findAll()
+    .then(data => {
+      res.send(data);
+    })
+    .catch(err => {
+      res.status(500).send({
+        message:
+          err.message || "Nothing found!"
+      });
+    });
+}
 
 // Get specific menu id === m_id !!!
-// export const findOne = (req, res) => {
-//   const id = req.query.m_id;
+export const findOne = (req, res) => {
+  const id = req.params.id;
 
-//   MenuSideDishes.findByPk(id)
-//     .then(data => {
-//       if (data) {
-//         res.send(data);
-//       } else {
-//         res.status(404).send({
-//           message: `Cannot find MenuSideDishes with Menu-Id=${id}.`
-//         });
-//       }
-//     })
-//     .catch(err => {
-//       res.status(500).send({
-//         message: "Error retrieving MenuSideDishes with Menu-Id=" + id
-//       });
-//     });
-// }
+  Users.findByPk(id)
+    .then(data => {
+      if (data) {
+        res.send(data);
+      } else {
+        res.status(404).send({
+          message: `Cannot find MenuSideDishes with Menu-Id=${id}.`
+        });
+      }
+    })
+    .catch(err => {
+      res.status(500).send({
+        message: "Error retrieving MenuSideDishes with Menu-Id=" + id
+      });
+    });
+}
 
 // Edit an existing menu
 // export const update = (req, res) => {

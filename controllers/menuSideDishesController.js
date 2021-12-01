@@ -28,8 +28,8 @@ export const create = (req, res) => {
 
 // Get all menus
 export const findAll = (req, res) => {
-  const id = req.params.m_id;
-  let condition = id ? { [Op.like]: `%${id}%` }  : null;
+  const m_id = req.params.m_id;
+  let condition = m_id ? { [Op.like]: `%${m_id}%` }  : null;
 
   MenuSideDishes.findAll({ where: condition })
     .then(data => {
