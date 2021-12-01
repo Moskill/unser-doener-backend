@@ -11,7 +11,9 @@ import { sequelize } from './index.js';
     price: {
       type: Sequelize.DECIMAL(6,2)
     },
-
+    imgUrl: {
+      type: Sequelize.STRING
+    },
   },
   {
     timestamps: false,

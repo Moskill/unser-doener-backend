@@ -1,12 +1,13 @@
 import express from 'express';
-import { findAll, findOne, create, update, remove } from '../controllers/menuController.js'
+import { findAll, findOne, create, update, remove } from '../controllers/menuController.js';
+import range from '../middlewares/range.js';
 
 const router = express.Router();
 
-router.get('/', findAll);
+router.get('/', range, findAll);
 router.get('/:id', findOne);
 router.post('/', create);
 router.put('/:id', update);
-router.delete('/', remove);
+router.delete('/:id', remove);
 
 export default router;
